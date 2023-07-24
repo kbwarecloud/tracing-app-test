@@ -13,6 +13,15 @@ logging:
   level:
     org.zalando.logbook: TRACE
 
+spring:
+  sleuth:
+    baggage:
+      correlation-enabled: false
+      correlation-fields:
+        - X-Business-Context-PL
+        - X-Request-Session-Id
+        - correlationId
+
 management:
   endpoints:
     web:
@@ -26,15 +35,7 @@ management:
       show-details: always
     prometheus:
       enabled: ${PROMETHEUS_ENDPOINT_ENABLED:true}
-  prometheus:
-    metrics:
-      export:
+  metrics:
+    export:
+      prometheus:
         enabled: ${PROMETHEUS_METRIC_EXPORT_ENABLED:true}
-  tracing:
-    baggage:
-      correlation:
-        enabled: false
-        fields:
-          - X-Business-Context-PL
-          - X-Request-Session-Id
-          - correlationId
