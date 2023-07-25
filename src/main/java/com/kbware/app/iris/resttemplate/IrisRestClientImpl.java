@@ -1,6 +1,5 @@
 package com.kbware.app.iris.resttemplate;
 
-import com.kbware.app.RestRequest;
 import com.kbware.app.iris.model.IrisDto;
 import com.kbware.app.iris.model.IrisResponseDto;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @ConditionalOnProperty(value = "iris-client.enabled", havingValue = "true")
-public class IrisApiImpl extends RestTemplateInvoke implements IrisRestClient {
+public class IrisRestClientImpl extends RestTemplateInvoke implements IrisRestClient {
   
   @Value("${iris-client.config.url}")
   private String irisUrl;

@@ -1,4 +1,4 @@
-package com.kbware.app;
+package com.kbware.app.iris.resttemplate;
 
 import lombok.Builder;
 import lombok.Data;
