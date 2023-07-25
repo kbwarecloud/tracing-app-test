@@ -9,6 +9,10 @@ iris-client:
     url: http://localhost:30604/mocks-service/iris/legacy/soabp/v1/physicalResource/
     systemId: 1234
 
+logging:
+  level:
+    org.zalando.logbook: TRACE
+
 management:
   endpoints:
     web:
