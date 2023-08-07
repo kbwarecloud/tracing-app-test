@@ -8,14 +8,13 @@ import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
 import com.kbware.app.iris.model.IrisResponseDto;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.actuate.observability.AutoConfigureObservability;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 import static com.github.tomakehurst.wiremock.client.WireMock.equalTo;
@@ -26,8 +25,7 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 import static pl.t_mobile.logging.tracingv2.TMobileCustomPropagation.SPAN_ID_KEY;
 import static pl.t_mobile.logging.tracingv2.TMobileCustomPropagation.TRACE_ID_KEY;
 
-
-@ExtendWith(SpringExtension.class)
+@AutoConfigureObservability
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 @ActiveProfiles("test")
 class TestControllerTests {
@@ -84,7 +82,6 @@ class TestControllerTests {
     // then
     integrationServices.verify(
       postRequestedFor(urlEqualTo(serviceUrl))
-        //TODO: with this assertion tests fails
         .withHeader(TRACE_ID_KEY, equalTo(trackingId))
     );
   }

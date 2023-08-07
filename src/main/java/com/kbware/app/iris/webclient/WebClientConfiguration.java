@@ -11,9 +11,8 @@ import org.springframework.web.reactive.function.client.WebClient;
 public class WebClientConfiguration {
   
   @Bean
-  public WebClient irisWebClientInternal(@Value("${iris-client.config.url}") String url) {
-    return WebClient.builder()
-      .baseUrl(url)
+  public WebClient irisWebClientInternal(@Value("${iris-client.config.url}") String url, WebClient.Builder webClientBuilder) {
+    return webClientBuilder.baseUrl(url)
       .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
       .defaultHeader("X-Tenant-Id", "tmpl")
       .defaultHeader("X-Originator", "RIM")
