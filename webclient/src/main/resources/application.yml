@@ -1,0 +1,38 @@
+server:
+  port: 31501
+
+iris-client:
+  enabled: true
+  config:
+    url: http://localhost:30604/mocks-service/iris/legacy/soabp/v1/physicalResource
+    systemId: 1234
+
+logging:
+  level:
+    org.zalando.logbook: TRACE
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: ${PROMETHEUS_ENDPOINTS_WEB_EXPOSURE_INCLUDE:*}
+        exclude: ${PROMETHEUS_ENDPOINTS_WEB_EXPOSURE_EXCLUDE:}
+  endpoint:
+    metrics:
+      enabled: ${PROMETHEUS_ENDPOINT_METRICS_ENABLED:true}
+    health:
+      show-details: always
+    prometheus:
+      enabled: ${PROMETHEUS_ENDPOINT_ENABLED:true}
+  prometheus:
+    metrics:
+      export:
+        enabled: ${PROMETHEUS_METRIC_EXPORT_ENABLED:true}
+  tracing:
+    baggage:
+      correlation:
+        enabled: false
+        fields:
+          - X-Business-Context-PL
+          - X-Request-Session-Id
+          - correlationId
